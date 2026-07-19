@@ -11,8 +11,13 @@ hamburger.addEventListener("click", () => {
 
 window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
+  const shoe = document.querySelector(".shoe");
 
   setTimeout(() => {
     loader.classList.add("hide");
-  }, 1500);
+    document.body.classList.add("loaded");
+
+    shoe.style.animation =
+      "shoeEntrance 1.5s ease-out forwards, shoeFloat 4s ease-in-out infinite 1.5s";
+  }, 1200);
 });
