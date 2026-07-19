@@ -4,7 +4,15 @@ const icon = document.querySelector("#hamburger i");
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("mobile-list-active");
-  
+
   icon.classList.toggle("fa-bars");
   icon.classList.toggle("fa-xmark");
+});
+
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+
+  setTimeout(() => {
+    loader.classList.add("hide");
+  }, 1500);
 });

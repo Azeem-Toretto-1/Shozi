@@ -13,14 +13,93 @@
 :root {
   --fresh-mint: #275848;
   --dark-fresh-mint: #163027;
-  --banana-skin: #F6D700;
-  --pure-white: #FFF;
-  --mint-cream: #FAFBF8;
-  --rose-white: #F1EAEA;
+  --banana-skin: #f6d700;
+  --pure-white: #fff;
+  --mint-cream: #fafbf8;
+  --rose-white: #f1eaea;
 }
 /* Basic Styling */
 body {
   background-color: var(--mint-cream);
+}
+
+/* ===========================
+   LOADER
+=========================== */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--fresh-mint);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+
+  transition:
+    opacity 0.7s ease,
+    visibility 0.7s ease;
+}
+
+.loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.loader-shoe {
+  width: 300px;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.35));
+  animation: loaderFloat 2.5s ease-in-out infinite;
+}
+
+.loader-logo {
+  color: var(--pure-white);
+  font-size: 5rem;
+  letter-spacing: 0.18rem;
+  text-transform: uppercase;
+}
+
+.loader-logo::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 4px;
+  margin: 0.8rem auto 0;
+  border-radius: 100vw;
+  background: var(--banana-skin);
+  animation: loaderLine 2s ease infinite;
+}
+
+@keyframes loaderFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-18deg);
+  }
+
+  50% {
+    transform: translateY(-18px) rotate(-15deg);
+  }
+}
+
+@keyframes loaderLine {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 100px;
+  }
+
+  100% {
+    width: 0;
+  }
 }
 
 .bg-fresh-mint {
@@ -75,7 +154,7 @@ img {
 .link {
   color: var(--mint-cream);
   font-family: Arial, Helvetica, sans-serif;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
 }
 
 .logo {
@@ -94,7 +173,7 @@ img {
   display: none;
 }
 
-.mobile-list .link{
+.mobile-list .link {
   font-size: 1.1rem;
   color: var(--dark-fresh-mint);
   text-transform: uppercase;
@@ -119,12 +198,13 @@ h1 {
 
 .wavy-shape {
   position: absolute;
-  bottom: 0;
+  bottom: -1rem;
+  width: 100%;
 }
 
 .shoe {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-20deg);
   width: 54vw;
@@ -157,7 +237,7 @@ h1 {
   font-size: 3.7rem;
   text-transform: uppercase;
   line-height: 100%;
-  text-shadow: .3rem .3rem 0 var(--pure-white);
+  text-shadow: 0.3rem 0.3rem 0 var(--pure-white);
   transform: rotate(-20deg);
   top: 0;
   left: 15%;
@@ -170,7 +250,7 @@ h1 {
 }
 
 .cylinder {
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .inner-cylinder {
@@ -200,17 +280,13 @@ h2 {
   font-size: 7.5vw;
   color: var(--fresh-mint);
   text-transform: uppercase;
-  letter-spacing: -.25rem;
+  letter-spacing: -0.25rem;
 }
 
 .capsule {
   width: 15rem;
   height: 6rem;
-  background: linear-gradient(
-    90deg,
-    pink,
-    #d4d4d4
-  );
+  background: linear-gradient(90deg, pink, #d4d4d4);
   border-radius: 100vw;
   display: inline-block;
   vertical-align: middle;
@@ -223,7 +299,7 @@ h2 {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 10rem;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .capsule:hover img {
@@ -234,7 +310,7 @@ h2 {
   width: 4rem;
   aspect-ratio: 1;
   border-radius: 100vw;
-  border: .3rem solid var(--pure-white);
+  border: 0.3rem solid var(--pure-white);
   overflow: hidden;
 }
 
@@ -264,7 +340,7 @@ h5 {
   text-transform: uppercase;
   padding: 1rem 2rem;
   border-radius: 100vw;
-  border: .4rem solid var(--pure-white);
+  border: 0.4rem solid var(--pure-white);
 }
 
 h3 {
@@ -304,7 +380,7 @@ h3 {
   width: 80%;
   font-size: 2rem;
   text-align: center;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .card:hover .pick-btn {
@@ -317,7 +393,7 @@ h3 {
 }
 
 .product .para,
-.product h3{
+.product h3 {
   color: var(--pure-white);
 }
 
@@ -328,14 +404,14 @@ h3 {
 .icon-btn {
   width: 5rem;
   aspect-ratio: 1;
-  outline: .4rem solid var(--pure-white);
+  outline: 0.4rem solid var(--pure-white);
   background: var(--banana-skin);
   color: var(--fresh-mint);
   font-size: 2rem;
   border-radius: 100vw;
   text-align: center;
   line-height: 5rem;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .category {
@@ -344,12 +420,12 @@ h3 {
 
 .category .inner-cylinder {
   background: var(--dark-fresh-mint);
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .category .inner-cylinder h4 {
   color: var(--pure-white);
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .m-top {
@@ -364,11 +440,11 @@ h3 {
   left: 70%;
   top: 50%;
   transform: translate(-50%, -10%);
-  box-shadow: rgba(0, 0, 0, 0.790) 0 2rem 6rem 0;
+  box-shadow: rgba(0, 0, 0, 0.79) 0 2rem 6rem 0;
   opacity: 0;
   visibility: hidden;
   overflow: hidden;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .category .inner-cylinder:hover ~ .category-img {
@@ -423,8 +499,8 @@ h3 {
   width: 10rem;
   left: 60%;
   top: 170px;
-  filter: drop-shadow(0 1rem 1rem rgba(0, 0, 0, 0.740));
-  transition: all .3s ease-in-out;
+  filter: drop-shadow(0 1rem 1rem rgba(0, 0, 0, 0.74));
+  transition: all 0.3s ease-in-out;
 }
 
 .contact:hover .contact-img {
@@ -448,7 +524,7 @@ h3 {
   border-radius: 5rem;
   text-transform: uppercase;
   color: var(--fresh-mint);
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .footer-link:hover {
@@ -466,50 +542,6 @@ h3 {
   font-size: 1rem;
   text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media screen and (max-width: 780px) {
   .navlist {
@@ -540,8 +572,8 @@ h3 {
     align-items: center;
     gap: 2rem;
     box-shadow: rgba(0, 0, 0, 0.7) 0 2rem 6rem 0;
-    outline: .4rem solid var(--pure-white);
-    transition: .5s ease-in-out;
+    outline: 0.4rem solid var(--pure-white);
+    transition: 0.5s ease-in-out;
     z-index: 5;
   }
 
@@ -552,7 +584,7 @@ h3 {
 
   h1 {
     font-size: 8.6rem;
-    letter-spacing: -.1rem;
+    letter-spacing: -0.1rem;
   }
 
   .hero-content {
@@ -586,7 +618,7 @@ h3 {
 
   h2 {
     font-size: 4.4rem;
-    letter-spacing: -.1rem;
+    letter-spacing: -0.1rem;
   }
 
   h5 {
@@ -603,7 +635,7 @@ h3 {
 
   .pick-btn {
     font-size: 1.5rem;
-    border-width: .2rem;
+    border-width: 0.2rem;
   }
 
   h3 {
