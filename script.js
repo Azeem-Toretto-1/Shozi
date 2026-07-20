@@ -61,16 +61,52 @@ function renderCart() {
 
         <div class="cart-info">
 
-          <h5>${product.name}</h5>
+       <h5>${product.name}</h5>
 
-          <p>$${product.price}</p>
+       <div class="qty-box">
 
-        </div>
+      <button class="qty-btn minus" data-id="${product.id}">
+          -
+      </button>
+
+       <span class="qty">
+          ${product.quantity}
+       </span>
+
+       <button class="qty-btn plus" data-id="${product.id}">
+          +
+      </button>
+
+  </div>
+
+   <p class="cart-price">
+      $${product.price * product.quantity}
+   </p>
+
+    </div>
 
       </div>
 
     `;
   });
+}
+
+function updateQuantity(productId, action) {
+  const product = cart.find((item) => item.id === productId);
+
+  if (!product) return;
+
+  if (action === "increase") {
+    product.quantity++;
+  }
+
+  if (action === "decrease") {
+    product.quantity--;
+  }
+
+  cart = cart.filter((item) => item.quantity > 0);
+
+  renderCart();
 }
 
 setupCartButtons();
@@ -86,7 +122,16 @@ function setupCartButtons() {
         return item.id === productId;
       });
 
-      cart.push(product);
+      const existingProduct = cart.find((item) => item.id === product.id);
+
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        cart.push({
+          ...product,
+          quantity: 1,
+        });
+      }
 
       renderCart();
 
@@ -146,4 +191,25 @@ mobileCartButton.addEventListener("click", (e) => {
 
 closeCart.addEventListener("click", () => {
   cartSidebar.classList.remove("cart-sidebar-active");
+});
+
+cartItems.addEventListener("click", (e) => {
+  const button = e.target;
+
+  if (
+    !button.classList.contains("plus") &&
+    !button.classList.contains("minus")
+  ) {
+    return;
+  }
+
+  const productId = Number(button.dataset.id);
+
+  if (button.classList.contains("plus")) {
+    updateQuantity(productId, "increase");
+  }
+
+  if (button.classList.contains("minus")) {
+    updateQuantity(productId, "decrease");
+  }
 });
