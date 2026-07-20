@@ -4,35 +4,48 @@ const products = [
     name: "Velocity Green",
     price: 129,
     image: "./assets/shoe1.png",
+    category: "mens",
   },
   {
     id: 2,
     name: "Shadow Runner",
     price: 149,
     image: "./assets/shoe2.png",
+    category: "mens",
   },
   {
     id: 3,
     name: "Urban Motion",
     price: 139,
     image: "./assets/shoe3.png",
+    category: "womens",
   },
   {
     id: 4,
     name: "Sprint Elite",
     price: 159,
     image: "./assets/shoe4.png",
+    category: "kids",
   },
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let currentCategory = "all";
 
 const productContainer = document.querySelector("#productContainer");
 
 function renderProducts() {
   productContainer.innerHTML = "";
 
-  products.forEach((product) => {
+  let filteredProducts = products;
+
+  if (currentCategory !== "all") {
+    filteredProducts = products.filter((product) => {
+      return product.category === currentCategory;
+    });
+  }
+
+  filteredProducts.forEach((product) => {
     productContainer.innerHTML += `
       <div class="card">
         <img src="${product.image}" alt="${product.name}" />
@@ -186,6 +199,9 @@ const cartItems = document.querySelector("#cartItems");
 const cartTotal = document.querySelector("#cartTotal");
 const cartCount = document.querySelector("#cartButton");
 const mobileCartCount = document.querySelector("#mobileCartButton");
+const mensLink = document.querySelector("#mensLink");
+const womensLink = document.querySelector("#womensLink");
+const kidsLink = document.querySelector("#kidsLink");
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("mobile-list-active");
@@ -262,3 +278,33 @@ function updateCartBadge() {
 }
 
 renderCart();
+
+mensLink.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  currentCategory = "mens";
+
+  renderProducts();
+
+  setupCartButtons();
+});
+
+womensLink.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  currentCategory = "womens";
+
+  renderProducts();
+
+  setupCartButtons();
+});
+
+kidsLink.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  currentCategory = "kids";
+
+  renderProducts();
+
+  setupCartButtons();
+});
