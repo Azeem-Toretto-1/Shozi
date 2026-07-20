@@ -21,3 +21,11 @@ window.addEventListener("load", () => {
       "shoeEntrance 1.5s ease-out forwards, shoeFloat 4s ease-in-out infinite 1.5s";
   }, 1200);
 });
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 20) {
+    document.body.classList.add("scrolled");
+  } else {
+    document.body.classList.remove("scrolled");
+  }
+});

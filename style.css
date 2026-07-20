@@ -144,8 +144,23 @@ img {
 }
 
 /* Header Styling */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.35s ease;
+}
+
 .navbar {
   min-height: 13vh;
+  z-index: 1000;
+
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .navlist {
@@ -249,6 +264,10 @@ h1 {
 
     transform: translate(-50%, -50%) rotate(-20deg) scale(1);
   }
+}
+
+main {
+  padding-top: 13vh;
 }
 
 .hero-section {
@@ -649,6 +668,15 @@ body.loaded .circle {
   opacity: 1;
   transform: scale(1);
 }
+
+body.scrolled header {
+  background: rgba(39, 88, 72, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  /* box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18); */
+}
+
+/* MEDIA QUERIE */
 
 @media screen and (max-width: 780px) {
   .navlist {
