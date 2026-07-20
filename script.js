@@ -50,9 +50,12 @@ function renderProducts() {
 renderProducts();
 
 function renderCart() {
+  let total = 0;
   cartItems.innerHTML = "";
 
   cart.forEach((product) => {
+    total += product.price * product.quantity;
+
     cartItems.innerHTML += `
     
       <div class="cart-item">
@@ -89,6 +92,8 @@ function renderCart() {
 
     `;
   });
+
+  cartTotal.textContent = `$${total}`;
 }
 
 function updateQuantity(productId, action) {
@@ -148,6 +153,7 @@ const cartButton = document.querySelector("#cartButton");
 const mobileCartButton = document.querySelector("#mobileCartButton");
 const closeCart = document.querySelector("#closeCart");
 const cartItems = document.querySelector("#cartItems");
+const cartTotal = document.querySelector("#cartTotal");
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("mobile-list-active");
