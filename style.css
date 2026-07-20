@@ -902,6 +902,37 @@ body.scrolled header {
   width: 100%;
 }
 
+.empty-cart {
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.empty-cart i {
+  font-size: 4rem;
+  color: var(--banana-skin);
+}
+
+.empty-cart h4 {
+  font-size: 2rem;
+  color: var(--fresh-mint);
+}
+
+.empty-cart p {
+  max-width: 240px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--fresh-mint);
+  line-height: 1.6;
+}
+
+.continue-shopping {
+  margin-top: 1rem;
+}
+
 /* MEDIA QUERIE */
 
 @media screen and (max-width: 780px) {

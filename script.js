@@ -25,7 +25,7 @@ const products = [
   },
 ];
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const productContainer = document.querySelector("#productContainer");
 
@@ -50,8 +50,37 @@ function renderProducts() {
 renderProducts();
 
 function renderCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+
   let total = 0;
+
   cartItems.innerHTML = "";
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = `
+  
+    <div class="empty-cart">
+
+      <i class="fa-solid fa-bag-shopping"></i>
+
+      <h4>Your Cart is Empty</h4>
+
+      <p>Add your favorite sneakers to get started.</p>
+
+      <button class="pick-btn continue-shopping">
+        Continue Shopping
+      </button>
+
+    </div>
+
+  `;
+
+    cartTotal.textContent = "$0";
+
+    updateCartBadge();
+
+    return;
+  }
 
   cart.forEach((product) => {
     total += product.price * product.quantity;
@@ -231,3 +260,5 @@ function updateCartBadge() {
   cartCount.textContent = `Cart (${totalItems})`;
   mobileCartCount.textContent = `Cart (${totalItems})`;
 }
+
+renderCart();
