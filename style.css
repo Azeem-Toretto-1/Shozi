@@ -665,6 +665,12 @@ h3 {
 .contact .icon-btn {
   background: var(--fresh-mint);
   color: var(--banana-skin);
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    background-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .contact-img {
@@ -682,7 +688,8 @@ h3 {
 }
 
 .contact:hover .icon-btn {
-  transform: rotate(-50deg);
+  transform: rotate(-45deg) scale(1.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
 }
 
 .footer-list {
