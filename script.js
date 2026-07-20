@@ -34,6 +34,33 @@ let currentCategory = "all";
 
 const productContainer = document.querySelector("#productContainer");
 
+function animateFilter(callback) {
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach((card) => {
+    card.style.opacity = "0";
+    card.style.transform = "translateY(15px) scale(.96)";
+  });
+
+  setTimeout(() => {
+    callback();
+
+    const newCards = document.querySelectorAll(".card");
+
+    newCards.forEach((card) => {
+      card.style.opacity = "0";
+      card.style.transform = "translateY(-15px) scale(.96)";
+    });
+
+    requestAnimationFrame(() => {
+      newCards.forEach((card) => {
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0) scale(1)";
+      });
+    });
+  }, 300);
+}
+
 function renderProducts() {
   productContainer.innerHTML = "";
 
@@ -286,9 +313,11 @@ allLink.addEventListener("click", (e) => {
 
   currentCategory = "all";
 
-  renderProducts();
+  animateFilter(() => {
+    renderProducts();
 
-  setupCartButtons();
+    setupCartButtons();
+  });
 
   updateActiveCategory(allLink);
 });
@@ -298,9 +327,11 @@ mensLink.addEventListener("click", (e) => {
 
   currentCategory = "mens";
 
-  renderProducts();
+  animateFilter(() => {
+    renderProducts();
 
-  setupCartButtons();
+    setupCartButtons();
+  });
 
   updateActiveCategory(mensLink);
 });
@@ -310,9 +341,11 @@ womensLink.addEventListener("click", (e) => {
 
   currentCategory = "womens";
 
-  renderProducts();
+  animateFilter(() => {
+    renderProducts();
 
-  setupCartButtons();
+    setupCartButtons();
+  });
 
   updateActiveCategory(womensLink);
 });
@@ -322,9 +355,11 @@ kidsLink.addEventListener("click", (e) => {
 
   currentCategory = "kids";
 
-  renderProducts();
+  animateFilter(() => {
+    renderProducts();
 
-  setupCartButtons();
+    setupCartButtons();
+  });
 
   updateActiveCategory(kidsLink);
 });
