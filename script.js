@@ -202,6 +202,7 @@ const mobileCartCount = document.querySelector("#mobileCartButton");
 const mensLink = document.querySelector("#mensLink");
 const womensLink = document.querySelector("#womensLink");
 const kidsLink = document.querySelector("#kidsLink");
+const categoryLinks = [mensLink, womensLink, kidsLink];
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("mobile-list-active");
@@ -287,6 +288,8 @@ mensLink.addEventListener("click", (e) => {
   renderProducts();
 
   setupCartButtons();
+
+  updateActiveCategory(mensLink);
 });
 
 womensLink.addEventListener("click", (e) => {
@@ -297,6 +300,8 @@ womensLink.addEventListener("click", (e) => {
   renderProducts();
 
   setupCartButtons();
+
+  updateActiveCategory(womensLink);
 });
 
 kidsLink.addEventListener("click", (e) => {
@@ -307,4 +312,14 @@ kidsLink.addEventListener("click", (e) => {
   renderProducts();
 
   setupCartButtons();
+
+  updateActiveCategory(kidsLink);
 });
+
+function updateActiveCategory(activeLink) {
+  categoryLinks.forEach((link) => {
+    link.classList.remove("link-active");
+  });
+
+  activeLink.classList.add("link-active");
+}

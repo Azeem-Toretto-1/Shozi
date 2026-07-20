@@ -173,6 +173,11 @@ header {
   letter-spacing: 0.1rem;
 }
 
+.link-active {
+  color: var(--banana-skin);
+  font-weight: 600;
+}
+
 .logo {
   font-size: 2.2rem;
   text-transform: uppercase;
