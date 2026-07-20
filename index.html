@@ -26,7 +26,7 @@
         <h2 class="loader-logo">SHOZI*</h2>
       </div>
     </div>
-    
+
     <!-- HEADER PART -->
     <header class="bg-fresh-mint">
       <nav class="navbar flex between container wrapper">
@@ -64,7 +64,7 @@
           </li>
           <!-- Wishlist -->
           <li>
-            <a href="#" class="link">Wishlist</a>
+            <a href="#" class="link" id="cartButton"> Cart (0) </a>
           </li>
         </ul>
 
@@ -101,13 +101,34 @@
           </li>
           <!-- Mobile-Wishlist -->
           <li>
-            <a href="#" class="link">Wishlist</a>
+            <a href="#" class="link" id="mobileCartButton"> Cart (0) </a>
           </li>
         </ul>
       </nav>
     </header>
 
     <!-- SECTION PART -->
+    <!-- Cart Sidebar -->
+    <aside class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+
+        <button class="close-cart" id="closeCart">✕</button>
+      </div>
+
+      <div class="cart-items" id="cartItems"></div>
+
+      <div class="cart-footer">
+        <h4>
+          Total:
+          <span id="cartTotal">$0</span>
+        </h4>
+
+        <button class="pick-btn checkout-btn">Checkout</button>
+      </div>
+    </aside>
+
+    <!-- MAIN SECTION -->
     <main>
       <section class="bg-fresh-mint hero-section">
         <div class="hero-content">
