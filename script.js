@@ -83,7 +83,7 @@ function renderCart() {
   </div>
 
    <p class="cart-price">
-      $${product.price * product.quantity}
+      ${product.price * product.quantity}
    </p>
 
     </div>
@@ -93,7 +93,8 @@ function renderCart() {
     `;
   });
 
-  cartTotal.textContent = `$${total}`;
+  cartTotal.textContent = `${total}`;
+  updateCartBadge();
 }
 
 function updateQuantity(productId, action) {
@@ -154,6 +155,8 @@ const mobileCartButton = document.querySelector("#mobileCartButton");
 const closeCart = document.querySelector("#closeCart");
 const cartItems = document.querySelector("#cartItems");
 const cartTotal = document.querySelector("#cartTotal");
+const cartCount = document.querySelector("#cartButton");
+const mobileCartCount = document.querySelector("#mobileCartButton");
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("mobile-list-active");
@@ -219,3 +222,12 @@ cartItems.addEventListener("click", (e) => {
     updateQuantity(productId, "decrease");
   }
 });
+
+function updateCartBadge() {
+  const totalItems = cart.reduce((total, product) => {
+    return total + product.quantity;
+  }, 0);
+
+  cartCount.textContent = `Cart (${totalItems})`;
+  mobileCartCount.textContent = `Cart (${totalItems})`;
+}
