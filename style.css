@@ -556,20 +556,36 @@ h3 {
   text-align: center;
   line-height: 5rem;
   transition: all 0.3s ease-in-out;
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    background-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .category {
   position: relative;
+  overflow: visible;
 }
 
 .category .inner-cylinder {
   background: var(--dark-fresh-mint);
   transition: 0.3s ease-in-out;
+  cursor: pointer;
+
+  transition:
+    background-color 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .category .inner-cylinder h4 {
   color: var(--pure-white);
   transition: 0.3s ease-in-out;
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease;
 }
 
 .m-top {
@@ -589,26 +605,39 @@ h3 {
   visibility: hidden;
   overflow: hidden;
   transition: all 0.5s ease-in-out;
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.45s ease;
+
+  will-change: transform;
+  pointer-events: none;
 }
 
 .category .inner-cylinder:hover ~ .category-img {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
 }
 
 .category .inner-cylinder:hover {
   background-color: var(--banana-skin);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
 }
 
 .category .inner-cylinder:hover h4 {
   color: var(--fresh-mint);
+  transform: translateX(12px);
 }
 
 .category .inner-cylinder:hover .icon-btn {
   background: var(--fresh-mint);
   color: var(--banana-skin);
-  transform: rotate(-50deg);
+  transform: rotate(-45deg) scale(1.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
 }
 
 .intro-image {
