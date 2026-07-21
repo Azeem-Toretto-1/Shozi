@@ -5,6 +5,8 @@ const products = [
     price: 129,
     image: "./assets/shoe1.png",
     category: "mens",
+    rating: 4.9,
+    description: "Lightweight everyday sneaker built for all-day comfort.",
   },
   {
     id: 2,
@@ -12,6 +14,8 @@ const products = [
     price: 149,
     image: "./assets/shoe2.png",
     category: "mens",
+    rating: 4.8,
+    description: "Performance runner with responsive cushioning and grip.",
   },
   {
     id: 3,
@@ -19,6 +23,8 @@ const products = [
     price: 139,
     image: "./assets/shoe3.png",
     category: "womens",
+    rating: 4.7,
+    description: "Modern streetwear sneaker with a sleek premium finish.",
   },
   {
     id: 4,
@@ -26,13 +32,32 @@ const products = [
     price: 159,
     image: "./assets/shoe4.png",
     category: "kids",
+    rating: 5.0,
+    description: "Ultra-light design made for speed, comfort, and confidence.",
   },
 ];
 
+const hamburger = document.querySelector("#hamburger");
+const mobileMenu = document.querySelector("#mobileMenu");
+const icon = document.querySelector("#hamburger i");
+const cartSidebar = document.querySelector("#cartSidebar");
+const cartButton = document.querySelector("#cartButton");
+const mobileCartButton = document.querySelector("#mobileCartButton");
+const closeCart = document.querySelector("#closeCart");
+const cartItems = document.querySelector("#cartItems");
+const cartTotal = document.querySelector("#cartTotal");
+const cartCount = document.querySelector("#cartButton");
+const mobileCartCount = document.querySelector("#mobileCartButton");
+const mensLink = document.querySelector("#mensLink");
+const womensLink = document.querySelector("#womensLink");
+const kidsLink = document.querySelector("#kidsLink");
+const allLink = document.querySelector("#allLink");
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let currentCategory = "all";
-
 const productContainer = document.querySelector("#productContainer");
+const toast = document.querySelector("#toast");
+const toastMessage = document.querySelector("#toastMessage");
+const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 function animateFilter(callback) {
   const cards = document.querySelectorAll(".card");
@@ -74,16 +99,43 @@ function renderProducts() {
 
   filteredProducts.forEach((product) => {
     productContainer.innerHTML += `
-      <div class="card">
-        <img src="${product.image}" alt="${product.name}" />
+  <div class="card">
+
+    <img src="${product.image}" alt="${product.name}" />
+
+    <div class="card-content">
+
+      <div class="rating">
+        <i class="fa-solid fa-star"></i>
+        <span>${product.rating}</span>
+      </div>
+
+      <h4 class="product-title">
+        ${product.name}
+      </h4>
+
+      <p class="product-description">
+        ${product.description}
+      </p>
+
+      <div class="card-footer">
+
+        <span class="product-price">
+          $${product.price}
+        </span>
 
         <button
-         class="pick-btn add-to-cart"
-         data-id="${product.id}">
-         Add to Cart
+          class="pick-btn add-to-cart"
+          data-id="${product.id}">
+          Add To Cart
         </button>
+
       </div>
-    `;
+
+    </div>
+
+  </div>
+`;
   });
 }
 
@@ -209,28 +261,20 @@ function setupCartButtons() {
       }
 
       renderCart();
+      
+      showToast(`${product.name} added to cart`);
+      button.textContent = "✓ Added";
+      button.classList.add("added-btn");
+
+      setTimeout(() => {
+        button.textContent = "Add To Cart";
+        button.classList.remove("added-btn");
+      }, 1500);
 
       console.log(cart);
     });
   });
 }
-
-const hamburger = document.querySelector("#hamburger");
-const mobileMenu = document.querySelector("#mobileMenu");
-const icon = document.querySelector("#hamburger i");
-const cartSidebar = document.querySelector("#cartSidebar");
-const cartButton = document.querySelector("#cartButton");
-const mobileCartButton = document.querySelector("#mobileCartButton");
-const closeCart = document.querySelector("#closeCart");
-const cartItems = document.querySelector("#cartItems");
-const cartTotal = document.querySelector("#cartTotal");
-const cartCount = document.querySelector("#cartButton");
-const mobileCartCount = document.querySelector("#mobileCartButton");
-const mensLink = document.querySelector("#mensLink");
-const womensLink = document.querySelector("#womensLink");
-const kidsLink = document.querySelector("#kidsLink");
-const allLink = document.querySelector("#allLink");
-const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("mobile-list-active");
@@ -304,6 +348,16 @@ function updateCartBadge() {
 
   cartCount.textContent = `Cart (${totalItems})`;
   mobileCartCount.textContent = `Cart (${totalItems})`;
+}
+
+function showToast(message) {
+  toastMessage.textContent = message;
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
 }
 
 renderCart();
