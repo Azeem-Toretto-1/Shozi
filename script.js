@@ -7,6 +7,7 @@ const products = [
     category: "mens",
     rating: 4.9,
     description: "Lightweight everyday sneaker built for all-day comfort.",
+    wishlist: false,
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const products = [
     category: "mens",
     rating: 4.8,
     description: "Performance runner with responsive cushioning and grip.",
+    wishlist: false,
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ const products = [
     category: "womens",
     rating: 4.7,
     description: "Modern streetwear sneaker with a sleek premium finish.",
+    wishlist: false,
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ const products = [
     category: "kids",
     rating: 5.0,
     description: "Ultra-light design made for speed, comfort, and confidence.",
+    wishlist: false,
   },
 ];
 
@@ -52,12 +56,18 @@ const mensLink = document.querySelector("#mensLink");
 const womensLink = document.querySelector("#womensLink");
 const kidsLink = document.querySelector("#kidsLink");
 const allLink = document.querySelector("#allLink");
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let currentCategory = "all";
 const productContainer = document.querySelector("#productContainer");
 const toast = document.querySelector("#toast");
 const toastMessage = document.querySelector("#toastMessage");
 const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+products.forEach((product) => {
+  product.wishlist = wishlist.includes(product.id);
+});
 
 function animateFilter(callback) {
   const cards = document.querySelectorAll(".card");
@@ -98,8 +108,19 @@ function renderProducts() {
   }
 
   filteredProducts.forEach((product) => {
+    const isWishlisted = wishlist.includes(product.id);
+
     productContainer.innerHTML += `
   <div class="card">
+
+
+  <button
+  class="wishlist-btn"
+  data-id="${product.id}">
+
+  <i class="${isWishlisted ? "fa-solid fa-heart" : "fa-regular fa-heart"}"></i>
+
+  </button>
 
     <img src="${product.image}" alt="${product.name}" />
 
@@ -261,7 +282,7 @@ function setupCartButtons() {
       }
 
       renderCart();
-      
+
       showToast(`${product.name} added to cart`);
       button.textContent = "✓ Added";
       button.classList.add("added-btn");
@@ -272,6 +293,28 @@ function setupCartButtons() {
       }, 1500);
 
       console.log(cart);
+    });
+  });
+}
+
+function setupWishlistButtons() {
+  const buttons = document.querySelectorAll(".wishlist-btn");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = Number(button.dataset.id);
+
+      if (wishlist.includes(productId)) {
+        wishlist = wishlist.filter((id) => id !== productId);
+      } else {
+        wishlist.push(productId);
+      }
+
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+      renderProducts();
+      setupCartButtons();
+      setupWishlistButtons();
     });
   });
 }
@@ -371,6 +414,7 @@ allLink.addEventListener("click", (e) => {
     renderProducts();
 
     setupCartButtons();
+    setupWishlistButtons();
   });
 
   updateActiveCategory(allLink);
@@ -385,6 +429,7 @@ mensLink.addEventListener("click", (e) => {
     renderProducts();
 
     setupCartButtons();
+    setupWishlistButtons();
   });
 
   updateActiveCategory(mensLink);
@@ -399,6 +444,7 @@ womensLink.addEventListener("click", (e) => {
     renderProducts();
 
     setupCartButtons();
+    setupWishlistButtons();
   });
 
   updateActiveCategory(womensLink);
@@ -413,6 +459,7 @@ kidsLink.addEventListener("click", (e) => {
     renderProducts();
 
     setupCartButtons();
+    setupWishlistButtons();
   });
 
   updateActiveCategory(kidsLink);
@@ -427,3 +474,4 @@ function updateActiveCategory(activeLink) {
 }
 
 updateActiveCategory(allLink);
+setupWishlistButtons();

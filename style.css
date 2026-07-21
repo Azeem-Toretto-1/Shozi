@@ -934,6 +934,41 @@ body.scrolled header {
   flex-direction: column;
 }
 
+.wishlist-btn {
+  position: absolute;
+  top: 18px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--fresh-mint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.1);
+  background: var(--banana-skin);
+}
+
+.wishlist-btn i {
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.wishlist-btn:hover i {
+  transform: scale(1.2);
+}
+
 .rating {
   display: flex;
   align-items: center;
@@ -984,7 +1019,7 @@ body.scrolled header {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1.4rem;
+  padding: 0 1.5rem 1.5rem;
 }
 
 .added-btn {
