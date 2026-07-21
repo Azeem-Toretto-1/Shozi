@@ -60,6 +60,8 @@ let currentCategory = "all";
 const productContainer = document.querySelector("#productContainer");
 const toast = document.querySelector("#toast");
 const toastMessage = document.querySelector("#toastMessage");
+const searchInput = document.querySelector("#searchInput");
+let searchValue = "";
 const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -105,6 +107,26 @@ function renderProducts() {
     filteredProducts = products.filter((product) => {
       return product.category === currentCategory;
     });
+  }
+
+  filteredProducts = filteredProducts.filter((product) => {
+    return product.name.toLowerCase().includes(searchValue.toLowerCase());
+  });
+
+  if (filteredProducts.length === 0) {
+    productContainer.innerHTML = `
+    <div class="no-products">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <h3>No Products Found</h3>
+
+      <p>Try searching with a different keyword.</p>
+
+    </div>
+  `;
+
+    return;
   }
 
   filteredProducts.forEach((product) => {
@@ -475,3 +497,12 @@ function updateActiveCategory(activeLink) {
 
 updateActiveCategory(allLink);
 setupWishlistButtons();
+
+searchInput.addEventListener("input", () => {
+  searchValue = searchInput.value;
+
+  renderProducts();
+
+  setupCartButtons();
+  setupWishlistButtons();
+});
