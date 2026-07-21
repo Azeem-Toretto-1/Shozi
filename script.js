@@ -64,6 +64,14 @@ const searchInput = document.querySelector("#searchInput");
 let searchValue = "";
 const sortSelect = document.querySelector("#sortSelect");
 let currentSort = "default";
+const quickViewOverlay = document.querySelector("#quickViewOverlay");
+const quickClose = document.querySelector("#quickClose");
+const quickImage = document.querySelector("#quickImage");
+const quickTitle = document.querySelector("#quickTitle");
+const quickRating = document.querySelector("#quickRating");
+const quickDescription = document.querySelector("#quickDescription");
+const quickPrice = document.querySelector("#quickPrice");
+const quickCartBtn = document.querySelector("#quickCartBtn");
 const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -183,6 +191,12 @@ function renderProducts() {
           Add To Cart
         </button>
 
+        <button
+        class="quick-view-btn"
+        data-id="${product.id}">
+        Quick View
+        </button>
+
       </div>
 
     </div>
@@ -291,6 +305,25 @@ function updateQuantity(productId, action) {
 
 setupCartButtons();
 
+function addToCart(productId) {
+  const product = products.find((item) => item.id === productId);
+
+  const existingProduct = cart.find((item) => item.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity++;
+  } else {
+    cart.push({
+      ...product,
+      quantity: 1,
+    });
+  }
+
+  renderCart();
+
+  showToast(`${product.name} added to cart`);
+}
+
 function setupCartButtons() {
   const buttons = document.querySelectorAll(".add-to-cart");
 
@@ -302,22 +335,15 @@ function setupCartButtons() {
         return item.id === productId;
       });
 
-      const existingProduct = cart.find((item) => item.id === product.id);
+      addToCart(productId);
 
-      if (existingProduct) {
-        existingProduct.quantity++;
-      } else {
-        cart.push({
-          ...product,
-          quantity: 1,
-        });
-      }
-
-      renderCart();
-
-      showToast(`${product.name} added to cart`);
       button.textContent = "✓ Added";
       button.classList.add("added-btn");
+
+      setTimeout(() => {
+        button.textContent = "Add To Cart";
+        button.classList.remove("added-btn");
+      }, 1500);
 
       setTimeout(() => {
         button.textContent = "Add To Cart";
@@ -328,6 +354,14 @@ function setupCartButtons() {
     });
   });
 }
+
+quickCartBtn.addEventListener("click", () => {
+  const productId = Number(quickCartBtn.dataset.id);
+
+  addToCart(productId);
+
+  quickViewOverlay.classList.remove("active");
+});
 
 function setupWishlistButtons() {
   const buttons = document.querySelectorAll(".wishlist-btn");
@@ -350,6 +384,46 @@ function setupWishlistButtons() {
     });
   });
 }
+
+function setupQuickViewButtons() {
+  const buttons = document.querySelectorAll(".quick-view-btn");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = Number(button.dataset.id);
+
+      const product = products.find((item) => item.id === productId);
+
+      quickImage.src = product.image;
+      quickImage.alt = product.name;
+
+      quickTitle.textContent = product.name;
+      quickRating.textContent = product.rating;
+      quickDescription.textContent = product.description;
+      quickPrice.textContent = `$${product.price}`;
+
+      quickCartBtn.dataset.id = product.id;
+
+      quickViewOverlay.classList.add("active");
+    });
+  });
+}
+
+quickClose.addEventListener("click", () => {
+  quickViewOverlay.classList.remove("active");
+});
+
+quickViewOverlay.addEventListener("click", (e) => {
+  if (e.target === quickViewOverlay) {
+    quickViewOverlay.classList.remove("active");
+  }
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    quickViewOverlay.classList.remove("active");
+  }
+});
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("mobile-list-active");
@@ -527,3 +601,5 @@ sortSelect.addEventListener("change", () => {
     setupWishlistButtons();
   });
 });
+
+setupQuickViewButtons();

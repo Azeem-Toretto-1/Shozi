@@ -353,6 +353,34 @@
       <span id="toastMessage">Product added to cart</span>
     </div>
 
+    <!-- Quick View Modal -->
+    <div class="quick-view-overlay" id="quickViewOverlay">
+      <div class="quick-view-modal">
+        <button class="quick-close" id="quickClose">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="quick-image">
+          <img id="quickImage" src="" alt="" />
+        </div>
+
+        <div class="quick-content">
+          <div class="rating">
+            <i class="fa-solid fa-star"></i>
+            <span id="quickRating"></span>
+          </div>
+
+          <h2 id="quickTitle"></h2>
+
+          <p id="quickDescription"></p>
+
+          <h3 id="quickPrice"></h3>
+
+          <button class="pick-btn" id="quickCartBtn">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+
     <script src="./script.js"></script>
   </body>
 </html>

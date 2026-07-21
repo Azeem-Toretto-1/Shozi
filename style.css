@@ -1152,6 +1152,124 @@ body.scrolled header {
   background: white;
 }
 
+.quick-view-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.35s ease;
+  z-index: 3000;
+}
+
+.quick-view-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quick-view-modal {
+  width: min(900px, 92%);
+  background: var(--mint-cream);
+  border-radius: 2rem;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  position: relative;
+  transform: translateY(40px) scale(0.95);
+  transition: 0.35s ease;
+}
+
+.quick-view-overlay.active .quick-view-modal {
+  transform: translateY(0) scale(1);
+}
+
+.quick-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--rose-white);
+  border-radius: 2rem;
+}
+
+.quick-image img {
+  width: 90%;
+  max-width: 380px;
+  object-fit: contain;
+  transition: 0.35s ease;
+}
+
+.quick-image img:hover {
+  transform: rotate(-10deg) scale(1);
+}
+
+.quick-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quick-content h2 {
+  font-size: 5rem;
+  margin-block: 1rem;
+  color: var(--fresh-mint);
+}
+
+.quick-content p {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.8;
+  color: var(--dark-fresh-mint);
+  margin-bottom: 1.5rem;
+}
+
+.quick-content h3 {
+  font-size: 2.4rem;
+  color: var(--fresh-mint);
+  margin-bottom: 2rem;
+}
+
+.quick-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--fresh-mint);
+  color: white;
+  font-size: 1.4rem;
+  transition: 0.3s;
+}
+
+.quick-close:hover {
+  background: var(--banana-skin);
+  color: var(--fresh-mint);
+  transform: rotate(90deg);
+}
+
+.quick-view-btn {
+  margin-top: 1rem;
+  width: 30%;
+  border: none;
+  background: transparent;
+  color: var(--fresh-mint);
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: 0.3s;
+}
+
+.quick-view-btn:hover {
+  color: var(--banana-skin);
+}
+
 /* MEDIA QUERIE */
 
 @media screen and (max-width: 780px) {
