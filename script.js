@@ -62,6 +62,8 @@ const toast = document.querySelector("#toast");
 const toastMessage = document.querySelector("#toastMessage");
 const searchInput = document.querySelector("#searchInput");
 let searchValue = "";
+const sortSelect = document.querySelector("#sortSelect");
+let currentSort = "default";
 const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -112,6 +114,14 @@ function renderProducts() {
   filteredProducts = filteredProducts.filter((product) => {
     return product.name.toLowerCase().includes(searchValue.toLowerCase());
   });
+
+  if (currentSort === "low-high") {
+    filteredProducts.sort((a, b) => a.price - b.price);
+  }
+
+  if (currentSort === "high-low") {
+    filteredProducts.sort((a, b) => b.price - a.price);
+  }
 
   if (filteredProducts.length === 0) {
     productContainer.innerHTML = `
@@ -505,4 +515,15 @@ searchInput.addEventListener("input", () => {
 
   setupCartButtons();
   setupWishlistButtons();
+});
+
+sortSelect.addEventListener("change", () => {
+  currentSort = sortSelect.value;
+
+  animateFilter(() => {
+    renderProducts();
+
+    setupCartButtons();
+    setupWishlistButtons();
+  });
 });
