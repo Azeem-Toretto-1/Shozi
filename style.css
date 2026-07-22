@@ -18,6 +18,7 @@
   --mint-cream: #fafbf8;
   --rose-white: #f1eaea;
 }
+
 /* Basic Styling */
 body {
   background-color: var(--mint-cream);
@@ -79,6 +80,7 @@ body {
 }
 
 @keyframes loaderFloat {
+
   0%,
   100% {
     transform: translateY(0) rotate(-18deg);
@@ -471,7 +473,7 @@ h5 {
   color: var(--pure-white);
   font-size: 2.5rem;
   text-transform: uppercase;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   border-radius: 100vw;
   border: 0.4rem solid var(--pure-white);
   position: relative;
@@ -526,7 +528,7 @@ h3 {
   flex: 1;
   flex-basis: 250px;
   background: var(--rose-white);
-  height: 70vh;
+  height: 90vh;
   border-radius: 5rem;
   position: relative;
   overflow: hidden;
@@ -560,7 +562,7 @@ h3 {
 }
 
 .card:hover img {
-  transform: translateY(-12px) rotate(-10deg) scale(1.08);
+  transform: translateY(-12px) rotate(-7deg) scale(1);
   filter: drop-shadow(0 25px 30px rgba(0, 0, 0, 0.22));
 }
 
@@ -648,7 +650,7 @@ h3 {
   pointer-events: none;
 }
 
-.category .inner-cylinder:hover ~ .category-img {
+.category .inner-cylinder:hover~.category-img {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, -50%) scale(1.08);
@@ -774,6 +776,7 @@ body.loaded .wavy-shape {
 }
 
 @keyframes shoeFloat {
+
   0%,
   100% {
     transform: translate(-50%, -50%) rotate(-20deg);
@@ -1625,10 +1628,6 @@ body.scrolled header {
   }
 }
 
-/* ===========================
-   Confetti
-=========================== */
-
 .confetti-container {
   position: absolute;
   inset: 0;
@@ -1658,140 +1657,1433 @@ body.scrolled header {
   }
 }
 
-/* MEDIA QUERIE */
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
 
-@media screen and (max-width: 780px) {
+/* ==========================================================================
+   BREAKPOINT: 1200px+ (Large Desktops)
+   ========================================================================== */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1380px;
+  }
+
+  /* Hero Section */
+  .hero-content {
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 30vw;
+    letter-spacing: -1rem;
+  }
+
+  .shoe {
+    width: 54vw;
+    top: 55%;
+    left: 50%;
+  }
+
+  .hero-inner {
+    bottom: 120px;
+  }
+
+  .circle {
+    width: 10rem;
+  }
+
+  .circle::before {
+    font-size: 3.7rem;
+    left: 15%;
+  }
+
+  .para {
+    max-width: 320px;
+  }
+
+  /* Cylinder / Discount Banner */
+  h4 {
+    font-size: 4.5vw;
+  }
+
+  /* Brand Section */
+  h2 {
+    font-size: 7.5vw;
+  }
+
+  h3 {
+    font-size: 6vw;
+  }
+
+  h5 {
+    font-size: 3vw;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 1920px+ (Full HD & 2K — Wide Screens)
+   ========================================================================== */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1800px;
+  }
+
+  /* Navbar — keep its natural height, just scale elements */
+  .navbar {
+    min-height: 13vh;
+  }
+
+  .logo {
+    font-size: 3rem;
+  }
+
+  .navlist {
+    gap: 3.5rem;
+  }
+
+  .link {
+    font-size: 1.2rem;
+  }
+
+  .search-box {
+    padding: 0.9rem 1.6rem;
+  }
+
+  .search-box input {
+    width: 220px;
+    font-size: 1.1rem;
+  }
+
+  /* Hero Section */
+  .hero-content {
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 28vw;
+    letter-spacing: -1.4rem;
+  }
+
+  .shoe {
+    width: 46vw;
+    top: 55%;
+    left: 50%;
+  }
+
+  .hero-inner {
+    bottom: 150px;
+  }
+
+  .circle {
+    width: 13rem;
+  }
+
+  .circle::before {
+    font-size: 5rem;
+    left: 12%;
+  }
+
+  .para {
+    max-width: 400px;
+    font-size: 1.2rem;
+  }
+
+  /* Cylinder / Discount Banner */
+  h4 {
+    font-size: 3.8vw;
+  }
+
+  .inner-cylinder {
+    min-height: 22vh;
+  }
+
+  /* Typography */
+  h2 {
+    font-size: 7vw;
+  }
+
+  h3 {
+    font-size: 5.5vw;
+  }
+
+  h5 {
+    font-size: 2.2vw;
+  }
+
+  /* Cards */
+  .card {
+    min-height: 600px;
+  }
+
+  .card img {
+    height: 300px;
+  }
+
+  /* Intro */
+  .intro-image {
+    height: 75vh;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 2560px+ (4K / Ultra-Wide Screens)
+   ========================================================================== */
+@media (min-width: 2560px) {
+  .container {
+    max-width: 2400px;
+  }
+
+  /* Navbar */
+  .navbar {
+    min-height: 8vh;
+  }
+
+  .logo {
+    font-size: 4rem;
+  }
+
+  .navlist {
+    gap: 4rem;
+  }
+
+  .link {
+    font-size: 1.4rem;
+    letter-spacing: 0.15rem;
+  }
+
+  .search-box {
+    padding: 1rem 2rem;
+  }
+
+  .search-box input {
+    width: 300px;
+    font-size: 1.3rem;
+  }
+
+  .search-box i {
+    font-size: 1.4rem;
+  }
+
+  /* Hero Section */
+  .hero-content {
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 22vw;
+    letter-spacing: -1.8rem;
+    line-height: 0.95;
+  }
+
+  .shoe {
+    width: 40vw;
+    top: 55%;
+    left: 50%;
+  }
+
+  .hero-inner {
+    bottom: 200px;
+  }
+
+  .circle {
+    width: 18rem;
+  }
+
+  .circle::before {
+    font-size: 7rem;
+    left: 12%;
+  }
+
+  .para {
+    max-width: 600px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
+  .hero-section {
+    border-radius: 0 0 8rem 8rem;
+  }
+
+  /* Discount Cylinder */
+  .cylinder {
+    padding: 3rem;
+  }
+
+  h4 {
+    font-size: 3vw;
+  }
+
+  .inner-cylinder {
+    min-height: 25vh;
+  }
+
+  /* Typography */
+  h2 {
+    font-size: 6vw;
+    letter-spacing: -0.5rem;
+  }
+
+  h3 {
+    font-size: 4.5vw;
+  }
+
+  h5 {
+    font-size: 1.6vw;
+  }
+
+  /* Cards */
+  .p-block {
+    padding-block: 10rem;
+  }
+
+  .card {
+    min-height: 900px;
+    border-radius: 7rem;
+  }
+
+  .card img {
+    height: 400px;
+    width: 80%;
+  }
+
+  .card-content {
+    padding: 2rem 2.5rem;
+  }
+
+  .pick-btn {
+    font-size: 3.2rem;
+    padding: 1.4rem 3rem;
+    border-width: 0.5rem;
+  }
+
+  /* Category */
+  .category .inner-cylinder {
+    min-height: 22vh;
+    padding: 2rem 4rem;
+  }
+
+  /* Intro / Philosophy */
+  .intro-image {
+    height: 80vh;
+    border-radius: 7rem;
+  }
+
+  /* Contact */
+  .contact {
+    width: 75%;
+  }
+
+  /* Footer */
+  .footer-link {
+    padding: 1.5rem 5rem;
+    font-size: 1.3rem;
+    border-radius: 7rem;
+  }
+
+  .copyright p {
+    font-size: 1.4rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 992px (Laptops & Large Tablets)
+   ========================================================================== */
+@media (max-width: 992px) {
+
+  /* Container & Layout */
+  .container {
+    max-width: 960px;
+  }
+
+  .p-block {
+    padding-block: 5rem;
+  }
+
+  main {
+    padding-top: 7.5vh;
+  }
+
+  /* Header & Navbar */
   .navlist {
     display: none;
   }
 
   .hamburger {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.8rem;
+    z-index: 1001;
   }
 
   .navbar {
     position: relative;
+    min-height: 10vh;
   }
 
+  /* Mobile Dropdown Navigation */
   .mobile-list {
-    display: block;
-    position: absolute;
-    background-color: var(--banana-skin);
-    top: 100px;
-    left: -100%;
-    transform: translateX(-50%);
-    padding: 3rem;
-    border-radius: 5rem;
-    width: 20rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    box-shadow: rgba(0, 0, 0, 0.7) 0 2rem 6rem 0;
-    outline: 0.4rem solid var(--pure-white);
-    transition: 0.5s ease-in-out;
-    z-index: 5;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(250, 251, 248, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 1.5rem 2rem;
+    gap: 1.2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 2rem 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    z-index: 999;
   }
 
-  .mobile-list-active {
-    left: 50%;
-    transform: translateX(-50%);
+  .mobile-list.mobile-list-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-list li {
+    width: 100%;
+    border-bottom: 1px solid var(--rose-white);
+    padding-bottom: 0.6rem;
+  }
+
+  .mobile-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .mobile-list .link {
+    font-size: 1.2rem;
+    display: block;
+    width: 100%;
+    color: var(--dark-fresh-mint);
+  }
+
+  /* Hero Section */
+  .hero-content {
+    min-height: 620px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding-top: 1rem;
   }
 
   h1 {
-    font-size: 8.6rem;
-    letter-spacing: -0.1rem;
-  }
-
-  .hero-content {
-    min-width: 83vh;
-    padding-top: 2rem;
-  }
-
-  .hero-inner {
-    display: none;
-  }
-
-  .shoe {
-    width: 27rem;
-    top: 68%;
+    font-size: 19vw;
+    line-height: 0.9;
+    letter-spacing: -0.35rem;
+    text-align: center;
+    position: relative;
+    z-index: 6;
   }
 
   .mobile-para {
     display: block;
-    font-family: Arial, Helvetica, sans-serif;
+    max-width: 420px;
+    margin: 0.8rem auto 0;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--pure-white);
+    position: relative;
+    z-index: 6;
   }
 
-  h4 {
-    font-size: 3rem;
+  .shoe {
+    position: absolute;
+    width: 63vw;
+    max-width: 500px;
+    left: 50%;
+    top: 64%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    z-index: 4;
+    filter: drop-shadow(0 20px 28px rgba(0, 0, 0, .28));
+  }
+
+  .hero-inner {
+    position: absolute;
+    inset: 0;
+  }
+
+  .circle {
+    position: absolute;
+    width: 7.2rem;
+    left: 7%;
+    top: 44%;
+    z-index: 5;
+  }
+
+  .circle::before {
+    font-size: 2.4rem;
+    left: 10%;
+  }
+
+  .para {
+    display: none;
+  }
+
+  .wavy-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .cylinder {
+    padding: 0.8rem 1rem;
   }
 
   .inner-cylinder {
-    min-height: 13vh;
-    justify-content: center;
-    padding: 3rem;
+    min-height: 55px;
+    border-radius: 100vw;
   }
 
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  /* Brand Section & Quotes */
   h2 {
-    font-size: 4.4rem;
-    letter-spacing: -0.1rem;
+    font-size: 6.5vw;
+    letter-spacing: -0.15rem;
   }
 
-  h5 {
-    font-size: 1.9rem;
+  .capsule {
+    width: 12rem;
+    height: 5rem;
   }
 
-  .gap {
-    gap: 2.5rem;
-  }
-
-  .profile {
-    width: 3rem;
-  }
-
-  .pick-btn {
-    font-size: 1.5rem;
-    border-width: 0.2rem;
+  .capsule img {
+    width: 8rem;
   }
 
   h3 {
-    font-size: 3.7rem;
+    font-size: 5vw;
   }
 
+  h4 {
+    font-size: 3.5vw;
+  }
+
+  /* Product Grid: 992px = 3 Columns */
   .card-container {
-    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
   }
 
-  .cylinder .inner-cylinder {
-    justify-content: space-between;
+  .card {
+    flex: unset;
+    width: 100%;
+    height: auto;
+    min-height: 520px;
+    border-radius: 3.5rem;
   }
 
+  /* Product Categories */
   .category-img {
     width: 8rem;
-    left: 55%;
+    left: 65%;
   }
 
+  /* Philosophy & Intro */
   .intro-image {
-    height: 50vh;
+    height: 60vh;
+    border-radius: 3.5rem;
   }
 
+  .intro-image .pick-btn {
+    font-size: 1.8rem;
+    padding: 0.8rem 1.6rem;
+  }
+
+  /* Contact & Footer */
   .contact {
-    width: 100%;
-    justify-content: space-between;
+    width: 90%;
   }
 
   .contact-img {
     width: 8rem;
-    left: 46%;
+    top: 120px;
   }
 
-  .search-box {
-    width: 100%;
-    margin-top: 1rem;
+  /* Modals & Controls */
+  .quick-view-modal {
+    width: min(900px, 92%);
+    padding: 1.8rem;
+    gap: 1.5rem;
   }
 
-  .search-box input {
+  .quick-content h2 {
+    font-size: 3.5rem;
+  }
+
+  .checkout-modal {
+    width: min(650px, 92%);
+    padding: 1.8rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 768px (Tablets & Medium Screens)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* Layout & Spacing */
+  .container {
+    max-width: 720px;
+  }
+
+  .p-block {
+    padding-block: 4rem;
+  }
+
+  header {
+    background: rgba(39, 88, 72, 0.95);
+  }
+
+  .navbar {
+    min-height: 9vh;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  /* Hero Section */
+  main {
+    padding-top: 7.5vh;
+  }
+
+  .hero-section {
+    margin-top: 0.8rem;
+    border-radius: 0 0 3.5rem 3.5rem;
+  }
+
+  .hero-content {
+    min-height: 560px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+  }
+
+  h1 {
+    font-size: 17vw;
+    letter-spacing: -0.25rem;
+    line-height: 0.9;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+  }
+
+  .mobile-para {
+    display: block;
+    font-size: .95rem;
+    line-height: 1.3;
+    max-width: 360px;
+    margin-top: .7rem;
+    text-align: center;
+    color: var(--pure-white);
+    position: relative;
+    z-index: 5;
+  }
+
+  .para {
+    display: none;
+  }
+
+  .hero-inner {
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
+    min-height: auto;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    display: block;
+  }
+
+  .circle {
+    position: absolute;
+    left: 6%;
+    top: 44%;
+    width: 6.3rem;
+    aspect-ratio: 1;
+    border-radius: 100vw;
+    background-color: var(--banana-skin);
+    z-index: 4;
+    pointer-events: auto;
+  }
+
+  .circle::before {
+    content: "# 1 Best Sneakers";
+    position: absolute;
+    font-size: 2rem;
+    text-transform: uppercase;
+    line-height: 95%;
+    text-shadow: 0.18rem 0.18rem 0 var(--pure-white);
+    transform: rotate(-20deg);
+    top: 0;
+    left: 8%;
+    right: auto;
+  }
+
+  .shoe {
+    position: absolute;
+    top: 64%;
+    left: 50%;
+    width: 68vw;
+    max-width: 450px;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    z-index: 3;
+    filter: drop-shadow(0 15px 22px rgba(0, 0, 0, 0.28));
+  }
+
+  .wavy-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Discount Cylinder */
+  .cylinder {
+    padding: 1rem;
+  }
+
+  .inner-cylinder {
+    min-height: 12vh;
+    padding-inline: 1rem;
+  }
+
+  h4 {
+    font-size: 2.2rem;
+  }
+
+  /* Brand Section & Testimonials */
+  h2 {
+    font-size: 6vw;
+    letter-spacing: -0.1rem;
+  }
+
+  .capsule {
+    width: 9rem;
+    height: 3.8rem;
+  }
+
+  .capsule img {
+    width: 6rem;
+  }
+
+  .inner-cylinder.flex.between.wrapper.gap {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.5rem 1rem;
+    border-radius: 3rem;
+    min-height: auto;
+    text-align: center;
+  }
+
+  h5 {
+    font-size: 1.1rem;
+  }
+
+  .pick-btn {
+    font-size: 1.4rem;
+    padding: 0.8rem 1.6rem;
+    border-width: 0.25rem;
+  }
+
+  /* Section Headings */
+  .flex.between.container.gap.wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .product .para {
+    text-align: left;
+  }
+
+  h3 {
+    font-size: 3.2rem;
+  }
+
+  /* Product Grid: 768px = 2 Columns */
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .card {
+    border-radius: 2.5rem;
+    min-height: 480px;
+  }
+
+  .card img {
+    height: 200px;
+    width: 80%;
+  }
+
+  /* Product Category Cards */
+  .m-top {
+    margin-top: 3rem;
+  }
+
+  .category {
+    margin-bottom: 1.5rem;
+  }
+
+  .category .inner-cylinder {
+    min-height: 14vh;
+    border-radius: 3rem;
+    padding: 1.2rem 1.8rem;
+  }
+
+  .category-img {
+    display: none;
+  }
+
+  /* Philosophy & Intro */
+  .intro-image {
+    height: 45vh;
+    border-radius: 2.5rem;
+  }
+
+  .intro-image .pick-btn {
+    font-size: 1.4rem;
+  }
+
+  /* Contact & Footer */
+  .contact {
+    width: 95%;
+  }
+
+  .contact-img {
+    display: none;
+  }
+
+  .footer-list {
+    flex-wrap: wrap;
+    min-height: auto;
+    padding-block: 1.5rem;
+    gap: 0.8rem;
+  }
+
+  .footer-link {
+    padding: 0.8rem 2rem;
+  }
+
+  /* Cart & Wishlist Sidebars */
+  .cart-sidebar,
+  .wishlist-sidebar {
+    width: 380px;
+  }
+
+  /* Quick View Modal */
+  .quick-view-modal {
+    flex-direction: column;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-radius: 1.5rem;
+  }
+
+  .quick-image {
+    min-height: 200px;
+    border-radius: 1.2rem;
+    padding: 1rem;
+  }
+
+  .quick-image img {
+    max-width: 240px;
+  }
+
+  .quick-content h2 {
+    font-size: 2.2rem;
+    margin-block: 0.4rem;
+  }
+
+  .quick-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .quick-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .size-selector {
+    margin: 1rem 0;
+  }
+
+  .quick-close {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    top: 12px;
+    right: 12px;
+  }
+
+  /* Checkout Modal */
+  .checkout-modal {
+    padding: 1.5rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 1.5rem;
+  }
+
+  .checkout-modal h2 {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .checkout-close {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    top: 12px;
+    right: 12px;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 576px (Small Mobile Landscape & Phones)
+   ========================================================================== */
+@media (max-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  /* Hero Section */
+  /* main {
+    padding-top: 70px;
+  } */
+
+  .hero-section {
+    margin-top: 0.6rem;
+    border-radius: 0 0 3rem 3rem;
+  }
+
+  .hero-content {
+    min-height: 510px;
+    padding-top: 0.2rem;
+  }
+
+  h1 {
+    font-size: 16vw;
+    letter-spacing: -0.2rem;
+    line-height: 0.9;
+  }
+
+  .mobile-para {
+    font-size: .9rem;
+    line-height: 1.4;
+    max-width: 320px;
+    margin-top: .6rem;
+  }
+
+  .circle {
+    left: 5%;
+    top: 44%;
+    width: 5.8rem;
+  }
+
+  .circle::before {
+    font-size: 1.8rem;
+    left: 9%;
+  }
+
+  .shoe {
+    width: 73vw;
+    max-width: 400px;
+    top: 64%;
+    left: 50%;
+  }
+
+  .wavy-shape {
+    bottom: 0;
+  }
+
+  .cylinder {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .inner-cylinder {
+    min-height: 46px;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  /* Brand Quote */
+  h2 {
+    font-size: 6.5vw;
+    letter-spacing: -0.05rem;
+  }
+
+  h3 {
+    font-size: 2.6rem;
+  }
+
+  .capsule {
+    width: 7.5rem;
+    height: 3.2rem;
+  }
+
+  .capsule img {
+    width: 5rem;
+  }
+
+  /* Product Grid: 2 Columns with compact spacing */
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .card {
+    border-radius: 2rem;
+    min-height: 440px;
+  }
+
+  .card img {
+    height: 170px;
+    width: 85%;
+    margin-top: 1.5rem;
+  }
+
+  .card-content {
+    padding: 0 0.8rem 1rem;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  .product-description {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .product-price {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .card-footer .pick-btn {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.6rem;
+    text-align: center;
+  }
+
+  .quick-view-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+  }
+
+  .wishlist-btn {
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  /* Sidebars (Cart & Wishlist) - Full Width */
+  .cart-sidebar,
+  .wishlist-sidebar {
+    width: 100%;
+    right: -100%;
+  }
+
+  .cart-sidebar-active,
+  .wishlist-sidebar-active {
+    right: 0;
+  }
+
+  .cart-header,
+  .cart-items,
+  .cart-footer,
+  .wishlist-items {
+    padding: 1.2rem;
+  }
+
+  /* Philosophy */
+  .intro-image {
+    height: 38vh;
+    border-radius: 2rem;
+  }
+
+  .intro-image .pick-btn {
+    font-size: 1.2rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 480px (Standard Mobile Devices)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .p-block {
+    padding-block: 3.5rem;
+  }
+
+  .wrapper {
+    padding-inline: 0.8rem;
+  }
+
+  /* Hero Section */
+  .hero-content {
+    min-height: 470px;
+  }
+
+  h1 {
+    font-size: 15vw;
+    letter-spacing: -0.1rem;
+  }
+
+  .mobile-para {
+    max-width: 290px;
+    font-size: .88rem;
+  }
+
+  .shoe {
+    width: 78vw;
+    max-width: 360px;
+    left: 50%;
+    top: 64%;
+  }
+
+  .hero-section {
+    border-radius: 0 0 2.5rem 2.5rem;
+  }
+
+  .circle {
+    width: 5.2rem;
+    top: 44%;
+    left: 4%;
+  }
+
+  .circle::before {
+    font-size: 1.6rem;
+    left: 1rem;
+  }
+
+  .wavy-shape {
+    bottom: 10%;
+  }
+
+  /* Section Headings */
+  h2 {
+    font-size: 7vw;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-size: 2.2rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  /* Product Grid: 480px = 1 Column */
+  .card-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .card {
+    border-radius: 2.2rem;
+    min-height: auto;
+    max-width: 360px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .card img {
+    height: 220px;
+    width: 75%;
+    margin-top: 2rem;
+  }
+
+  .card-content {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .product-title {
+    font-size: 1.3rem;
+  }
+
+  .product-description {
+    display: block;
+    font-size: 0.9rem;
+  }
+
+  .card-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+
+  .product-price {
+    font-size: 1.4rem;
+    text-align: left;
+  }
+
+  .card-footer .pick-btn {
+    width: auto;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+  }
+
+  .quick-view-btn {
+    width: auto;
+    font-size: 0.9rem;
+  }
+
+  .wishlist-btn {
+    top: 16px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  /* Buttons & Controls */
+  .pick-btn {
+    font-size: 1.2rem;
+    padding: 0.7rem 1.4rem;
+    border-width: 0.2rem;
+  }
+
+  .icon-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.4rem;
+    line-height: 3.5rem;
+    outline-width: 0.25rem;
+  }
+
+  /* Toast Notification */
+  .toast {
+    top: 15px;
+    right: 15px;
+    left: 15px;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.8rem 1.2rem;
+    transform: translateY(-150%);
+  }
+
+  .toast.show {
+    transform: translateY(0);
+  }
+
+  /* Modals */
+  .success-modal {
+    padding: 2rem 1.2rem;
+    border-radius: 1.5rem;
+  }
+
+  .success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .success-modal h2 {
+    font-size: 2.2rem;
+  }
+
+  .footer-link {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 360px (Ultra-Small Screens & Narrow Mobile)
+   ========================================================================== */
+@media (max-width: 360px) {
+  .wrapper {
+    padding-inline: 0.5rem;
+  }
+
+  .p-block {
+    padding-block: 2.8rem;
+  }
+
+  /* Hero Section */
+  .hero-content {
+    min-height: 430px;
+  }
+
+  h1 {
+    font-size: 14vw;
+    letter-spacing: 0;
+  }
+
+  .mobile-para {
+    font-size: 0.82rem;
+    max-width: 260px;
+  }
+
+  .circle {
+    width: 4.7rem;
+    left: 3%;
+    top: 44%;
+  }
+
+  .circle::before {
+    font-size: 1.35rem;
+    left: 11%;
+  }
+
+  .shoe {
+    width: 84vw;
+    max-width: 320px;
+    left: 50%;
+    top: 64%;
+  }
+
+  .inner-cylinder {
+    min-height: 42px;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+
+  /* Headings & Text */
+  h2 {
+    font-size: 7.5vw;
+  }
+
+  h3 {
+    font-size: 1.9rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+
+  /* Product Cards */
+  .card {
+    border-radius: 1.8rem;
+    max-width: 100%;
+  }
+
+  .card img {
+    height: 190px;
+  }
+
+  .card-footer .pick-btn {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .quick-view-btn {
+    font-size: 0.8rem;
+  }
+
+  /* Category Cylinders */
+  .category .inner-cylinder {
+    padding: 1rem;
+  }
+
+  /* Philosophy & Intro */
+  .intro-image {
+    height: 32vh;
+    border-radius: 1.5rem;
+  }
+
+  .intro-image .pick-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Modals */
+  .quick-view-modal,
+  .checkout-modal,
+  .success-modal {
+    padding: 1rem;
+    border-radius: 1.2rem;
+  }
+
+  .quick-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .quick-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .size-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 0.85rem;
+  }
+
+  .checkout-modal h2 {
+    font-size: 1.8rem;
+  }
+
+  .footer-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
 }
