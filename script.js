@@ -72,6 +72,11 @@ const quickRating = document.querySelector("#quickRating");
 const quickDescription = document.querySelector("#quickDescription");
 const quickPrice = document.querySelector("#quickPrice");
 const quickCartBtn = document.querySelector("#quickCartBtn");
+const wishlistSidebar = document.querySelector("#wishlistSidebar");
+const wishlistButton = document.querySelector("#wishlistButton");
+const mobileWishlistButton = document.querySelector("#mobileWishlistButton");
+const closeWishlist = document.querySelector("#closeWishlist");
+const wishlistItems = document.querySelector("#wishlistItems");
 const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -79,7 +84,25 @@ let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 let selectedSize = "7";
 
 products.forEach((product) => {
-  product.wishlist = wishlist.includes(product.id);
+  product.wishlist = wishlist.some((item) => {
+    return item.id === product.id;
+  });
+});
+
+wishlistButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  wishlistSidebar.classList.add("wishlist-sidebar-active");
+});
+
+mobileWishlistButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  wishlistSidebar.classList.add("wishlist-sidebar-active");
+});
+
+closeWishlist.addEventListener("click", () => {
+  wishlistSidebar.classList.remove("wishlist-sidebar-active");
 });
 
 function animateFilter(callback) {
@@ -149,7 +172,9 @@ function renderProducts() {
   }
 
   filteredProducts.forEach((product) => {
-    const isWishlisted = wishlist.includes(product.id);
+    const isWishlisted = wishlist.some((item) => {
+      return item.id === product.id;
+    });
 
     productContainer.innerHTML += `
   <div class="card">
@@ -290,6 +315,78 @@ function renderCart() {
   updateCartBadge();
 }
 
+function renderWishlist() {
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+  wishlistItems.innerHTML = "";
+
+  if (wishlist.length === 0) {
+    wishlistItems.innerHTML = `
+
+      <div class="empty-cart">
+
+        <i class="fa-regular fa-heart"></i>
+
+        <h4>Your Wishlist is Empty</h4>
+
+        <p>Save your favorite sneakers and they'll appear here.</p>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  wishlist.forEach((product) => {
+    wishlistItems.innerHTML += `
+    <div class="wishlist-item">
+
+      <img src="${product.image}" alt="${product.name}">
+
+      <div class="wishlist-info">
+
+        <h5>${product.name}</h5>
+
+        <p class="wishlist-price">$${product.price}</p>
+
+        <div class="wishlist-actions">
+
+          <button
+            class="move-cart"
+            data-id="${product.id}">
+            Move To Cart
+          </button>
+
+          <button
+            class="remove-wishlist"
+            data-id="${product.id}">
+            Remove
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+  });
+}
+
+wishlistItems.addEventListener("click", (e) => {
+  const button = e.target;
+
+  const productId = Number(button.dataset.id);
+
+  if (button.classList.contains("remove-wishlist")) {
+    removeFromWishlist(productId);
+  }
+
+  if (button.classList.contains("move-cart")) {
+    moveToCart(productId);
+  }
+});
+
 function updateQuantity(productId, action) {
   const product = cart.find((item) => item.id === productId);
 
@@ -378,19 +475,88 @@ function setupWishlistButtons() {
     button.addEventListener("click", () => {
       const productId = Number(button.dataset.id);
 
-      if (wishlist.includes(productId)) {
-        wishlist = wishlist.filter((id) => id !== productId);
+      const product = products.find((item) => {
+        return item.id === productId;
+      });
+
+      const existingProduct = wishlist.find((item) => {
+        return item.id === productId;
+      });
+
+      if (existingProduct) {
+        wishlist = wishlist.filter((item) => {
+          return item.id !== productId;
+        });
       } else {
-        wishlist.push(productId);
+        wishlist.push({
+          ...product,
+        });
       }
 
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
+      renderWishlist();
       renderProducts();
       setupCartButtons();
       setupWishlistButtons();
     });
   });
+}
+
+function removeFromWishlist(productId) {
+  wishlist = wishlist.filter((item) => {
+    return item.id !== productId;
+  });
+
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+  renderWishlist();
+  renderProducts();
+
+  setupCartButtons();
+  setupWishlistButtons();
+  setupQuickViewButtons();
+
+  showToast("Removed from wishlist");
+}
+
+function moveToCart(productId) {
+  const product = wishlist.find((item) => {
+    return item.id === productId;
+  });
+
+  if (!product) return;
+
+  const existingProduct = cart.find((item) => {
+    return item.id === productId && item.size === selectedSize;
+  });
+
+  if (existingProduct) {
+    existingProduct.quantity++;
+  } else {
+    cart.push({
+      ...product,
+      quantity: 1,
+      size: selectedSize,
+    });
+  }
+
+  wishlist = wishlist.filter((item) => {
+    return item.id !== productId;
+  });
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+  renderCart();
+  renderWishlist();
+  renderProducts();
+
+  setupCartButtons();
+  setupWishlistButtons();
+  setupQuickViewButtons();
+
+  showToast("Moved to cart");
 }
 
 function setupQuickViewButtons() {
@@ -545,6 +711,7 @@ function showToast(message) {
   }, 2000);
 }
 
+renderWishlist();
 renderCart();
 
 allLink.addEventListener("click", (e) => {
