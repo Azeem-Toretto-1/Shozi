@@ -77,6 +77,19 @@ const wishlistButton = document.querySelector("#wishlistButton");
 const mobileWishlistButton = document.querySelector("#mobileWishlistButton");
 const closeWishlist = document.querySelector("#closeWishlist");
 const wishlistItems = document.querySelector("#wishlistItems");
+const checkoutOverlay = document.querySelector("#checkoutOverlay");
+const checkoutClose = document.querySelector("#checkoutClose");
+const checkoutBtn = document.querySelector(".checkout-btn");
+const summarySubtotal = document.querySelector("#summarySubtotal");
+const summaryTotal = document.querySelector("#summaryTotal");
+const checkoutForm = document.querySelector("#checkoutForm");
+const customerName = document.querySelector("#customerName");
+const customerEmail = document.querySelector("#customerEmail");
+const customerPhone = document.querySelector("#customerPhone");
+const customerAddress = document.querySelector("#customerAddress");
+const successOverlay = document.querySelector("#successOverlay");
+const continueShopping = document.querySelector("#continueShopping");
+const confettiContainer = document.querySelector("#confettiContainer");
 const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -263,6 +276,7 @@ function renderCart() {
     cartTotal.textContent = "$0";
 
     updateCartBadge();
+    updateCheckoutSummary();
 
     return;
   }
@@ -313,6 +327,7 @@ function renderCart() {
 
   cartTotal.textContent = `${total}`;
   updateCartBadge();
+  updateCheckoutSummary();
 }
 
 function renderWishlist() {
@@ -671,6 +686,26 @@ closeCart.addEventListener("click", () => {
   cartSidebar.classList.remove("cart-sidebar-active");
 });
 
+checkoutBtn.addEventListener("click", () => {
+  checkoutOverlay.classList.add("active");
+});
+
+checkoutClose.addEventListener("click", () => {
+  checkoutOverlay.classList.remove("active");
+});
+
+checkoutOverlay.addEventListener("click", (e) => {
+  if (e.target === checkoutOverlay) {
+    checkoutOverlay.classList.remove("active");
+  }
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    checkoutOverlay.classList.remove("active");
+  }
+});
+
 cartItems.addEventListener("click", (e) => {
   const button = e.target;
 
@@ -699,6 +734,15 @@ function updateCartBadge() {
 
   cartCount.textContent = `Cart (${totalItems})`;
   mobileCartCount.textContent = `Cart (${totalItems})`;
+}
+
+function updateCheckoutSummary() {
+  const subtotal = cart.reduce((total, product) => {
+    return total + product.price * product.quantity;
+  }, 0);
+
+  summarySubtotal.textContent = `$${subtotal}`;
+  summaryTotal.textContent = `$${subtotal}`;
 }
 
 function showToast(message) {
@@ -806,3 +850,83 @@ sortSelect.addEventListener("change", () => {
 });
 
 setupQuickViewButtons();
+
+checkoutForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (
+    customerName.value.trim() === "" ||
+    customerEmail.value.trim() === "" ||
+    customerPhone.value.trim() === "" ||
+    customerAddress.value.trim() === ""
+  ) {
+    showToast("Please fill all checkout details.");
+    return;
+  }
+
+  if (cart.length === 0) {
+    showToast("Your cart is empty.");
+    return;
+  }
+
+  checkoutOverlay.classList.remove("active");
+
+  successOverlay.classList.add("active");
+  launchConfetti();
+
+  cart = [];
+  wishlist = [];
+
+  localStorage.removeItem("cart");
+  localStorage.removeItem("wishlist");
+
+  checkoutForm.reset();
+
+  renderCart();
+  renderWishlist();
+  renderProducts();
+
+  setupCartButtons();
+  setupWishlistButtons();
+  setupQuickViewButtons();
+});
+
+continueShopping.addEventListener("click", () => {
+  successOverlay.classList.remove("active");
+
+  cartSidebar.classList.remove("cart-sidebar-active");
+
+  wishlistSidebar.classList.remove("wishlist-sidebar-active");
+
+  showToast("Thank you for shopping!");
+});
+
+function launchConfetti() {
+  confettiContainer.innerHTML = "";
+
+  const colors = [
+    "#f6d700",
+    "#275848",
+    "#ffffff",
+    "#ff6b6b",
+    "#4ecdc4",
+    "#6c5ce7",
+  ];
+
+  for (let i = 0; i < 80; i++) {
+    const confetti = document.createElement("span");
+
+    confetti.classList.add("confetti");
+
+    confetti.style.left = Math.random() * 100 + "%";
+
+    confetti.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    confetti.style.animationDelay = Math.random() * 0.5 + "s";
+
+    confetti.style.animationDuration = 2 + Math.random() * 2 + "s";
+
+    confettiContainer.appendChild(confetti);
+  }
+}

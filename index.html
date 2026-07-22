@@ -418,6 +418,102 @@
       </div>
     </div>
 
+    <!-- Checkout Modal -->
+    <div class="checkout-overlay" id="checkoutOverlay">
+      <div class="checkout-modal">
+        <button class="checkout-close" id="checkoutClose">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2>Checkout</h2>
+
+        <div class="checkout-body">
+          <form class="checkout-form" id="checkoutForm">
+            <div class="input-group">
+              <label>Full Name</label>
+              <input
+                type="text"
+                id="customerName"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                id="customerEmail"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Phone Number</label>
+              <input
+                type="tel"
+                id="customerPhone"
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Delivery Address</label>
+              <textarea
+                id="customerAddress"
+                rows="4"
+                placeholder="Enter your delivery address"
+                required
+              ></textarea>
+            </div>
+
+            <div class="order-summary">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="summarySubtotal">$0</span>
+              </div>
+
+              <div class="summary-row">
+                <span>Shipping</span>
+                <span>FREE</span>
+              </div>
+
+              <div class="summary-row total-row">
+                <span>Total</span>
+                <span id="summaryTotal">$0</span>
+              </div>
+            </div>
+
+            <button type="submit" class="pick-btn checkout-submit">
+              Place Order
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Success Screen -->
+    <div class="success-overlay" id="successOverlay">
+      <div id="confettiContainer" class="confetti-container"></div>
+      <div class="success-modal">
+        <div class="success-icon">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <h2>Order Successful!</h2>
+
+        <p>
+          Thank you for your purchase. Your order has been placed successfully.
+        </p>
+
+        <button class="pick-btn" id="continueShopping">
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+
     <script src="./script.js"></script>
   </body>
 </html>
