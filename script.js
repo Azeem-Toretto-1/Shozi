@@ -76,6 +76,7 @@ const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+let selectedSize = "7";
 
 products.forEach((product) => {
   product.wishlist = wishlist.includes(product.id);
@@ -254,6 +255,10 @@ function renderCart() {
 
        <h5>${product.name}</h5>
 
+       <p class="cart-size">
+       Size: ${product.size}
+       </p>
+
        <div class="qty-box">
 
       <button class="qty-btn minus" data-id="${product.id}">
@@ -308,7 +313,9 @@ setupCartButtons();
 function addToCart(productId) {
   const product = products.find((item) => item.id === productId);
 
-  const existingProduct = cart.find((item) => item.id === product.id);
+  const existingProduct = cart.find((item) => {
+    return item.id === product.id && item.size === selectedSize;
+  });
 
   if (existingProduct) {
     existingProduct.quantity++;
@@ -316,6 +323,7 @@ function addToCart(productId) {
     cart.push({
       ...product,
       quantity: 1,
+      size: selectedSize,
     });
   }
 
@@ -404,6 +412,18 @@ function setupQuickViewButtons() {
 
       quickCartBtn.dataset.id = product.id;
 
+      selectedSize = "7";
+
+      document.querySelectorAll(".size-btn").forEach((btn) => {
+        btn.classList.remove("active");
+
+        if (btn.dataset.size === "7") {
+          btn.classList.add("active");
+        }
+      });
+
+      setupSizeButtons();
+
       quickViewOverlay.classList.add("active");
     });
   });
@@ -424,6 +444,22 @@ window.addEventListener("keydown", (e) => {
     quickViewOverlay.classList.remove("active");
   }
 });
+
+function setupSizeButtons() {
+  const buttons = document.querySelectorAll(".size-btn");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((btn) => {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      selectedSize = button.dataset.size;
+    });
+  });
+}
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("mobile-list-active");
