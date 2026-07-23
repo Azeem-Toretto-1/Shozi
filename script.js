@@ -474,11 +474,6 @@ function setupCartButtons() {
         button.classList.remove("added-btn");
       }, 1500);
 
-      setTimeout(() => {
-        button.textContent = "Add To Cart";
-        button.classList.remove("added-btn");
-      }, 1500);
-
       console.log(cart);
     });
   });
@@ -623,18 +618,6 @@ quickClose.addEventListener("click", () => {
   quickViewOverlay.classList.remove("active");
 });
 
-quickViewOverlay.addEventListener("click", (e) => {
-  if (e.target === quickViewOverlay) {
-    quickViewOverlay.classList.remove("active");
-  }
-});
-
-window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    quickViewOverlay.classList.remove("active");
-  }
-});
-
 function setupSizeButtons() {
   const buttons = document.querySelectorAll(".size-btn");
 
@@ -709,6 +692,13 @@ checkoutOverlay.addEventListener("click", (e) => {
   if (e.target === checkoutOverlay) {
     checkoutOverlay.classList.remove("active");
   }
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+
+  quickViewOverlay.classList.remove("active");
+  checkoutOverlay.classList.remove("active");
 });
 
 window.addEventListener("keydown", (e) => {
