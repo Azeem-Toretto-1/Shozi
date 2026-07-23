@@ -90,6 +90,15 @@ const customerAddress = document.querySelector("#customerAddress");
 const successOverlay = document.querySelector("#successOverlay");
 const continueShopping = document.querySelector("#continueShopping");
 const confettiContainer = document.querySelector("#confettiContainer");
+const pickSneakersBtn = document.querySelector("#pickSneakersBtn");
+const mobileCategoryLinks = document.querySelectorAll(".mobile-category");
+const footerMens = document.querySelector("#footerMens");
+const footerWomens = document.querySelector("#footerWomens");
+const footerKids = document.querySelector("#footerKids");
+const mobileAllLink = document.querySelector("#mobileAllLink");
+const mobileMensLink = document.querySelector("#mobileMensLink");
+const mobileWomensLink = document.querySelector("#mobileWomensLink");
+const mobileKidsLink = document.querySelector("#mobileKidsLink");
 const categoryLinks = [allLink, mensLink, womensLink, kidsLink];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -642,7 +651,9 @@ function setupSizeButtons() {
   });
 }
 
-hamburger.addEventListener("click", () => {
+hamburger.addEventListener("click", (e) => {
+  e.preventDefault();
+
   mobileMenu.classList.toggle("mobile-list-active");
 
   icon.classList.toggle("fa-bars");
@@ -760,62 +771,57 @@ renderCart();
 
 allLink.addEventListener("click", (e) => {
   e.preventDefault();
-
-  currentCategory = "all";
-
-  animateFilter(() => {
-    renderProducts();
-
-    setupCartButtons();
-    setupWishlistButtons();
-  });
-
-  updateActiveCategory(allLink);
+  goToCategory("all", allLink);
 });
 
 mensLink.addEventListener("click", (e) => {
   e.preventDefault();
-
-  currentCategory = "mens";
-
-  animateFilter(() => {
-    renderProducts();
-
-    setupCartButtons();
-    setupWishlistButtons();
-  });
-
-  updateActiveCategory(mensLink);
+  goToCategory("mens", mensLink);
 });
 
 womensLink.addEventListener("click", (e) => {
   e.preventDefault();
-
-  currentCategory = "womens";
-
-  animateFilter(() => {
-    renderProducts();
-
-    setupCartButtons();
-    setupWishlistButtons();
-  });
-
-  updateActiveCategory(womensLink);
+  goToCategory("womens", womensLink);
 });
 
 kidsLink.addEventListener("click", (e) => {
   e.preventDefault();
+  goToCategory("kids", kidsLink);
+});
 
-  currentCategory = "kids";
+footerMens.addEventListener("click", (e) => {
+  e.preventDefault();
+  goToCategory("mens", mensLink);
+});
 
-  animateFilter(() => {
-    renderProducts();
+footerWomens.addEventListener("click", (e) => {
+  e.preventDefault();
+  goToCategory("womens", womensLink);
+});
 
-    setupCartButtons();
-    setupWishlistButtons();
-  });
+footerKids.addEventListener("click", (e) => {
+  e.preventDefault();
+  goToCategory("kids", kidsLink);
+});
 
-  updateActiveCategory(kidsLink);
+mobileAllLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  goToCategory("all", allLink);
+});
+
+mobileMensLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  goToCategory("mens", mensLink);
+});
+
+mobileWomensLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  goToCategory("womens", womensLink);
+});
+
+mobileKidsLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  goToCategory("kids", kidsLink);
 });
 
 function updateActiveCategory(activeLink) {
@@ -824,6 +830,31 @@ function updateActiveCategory(activeLink) {
   });
 
   activeLink.classList.add("link-active");
+}
+
+function goToCategory(category, activeLink = null) {
+  currentCategory = category;
+
+  animateFilter(() => {
+    renderProducts();
+    setupCartButtons();
+    setupWishlistButtons();
+    setupQuickViewButtons();
+  });
+
+  document.getElementById("products").scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+
+  if (activeLink) {
+    updateActiveCategory(activeLink);
+  }
+
+  mobileMenu.classList.remove("mobile-list-active");
+
+  icon.classList.remove("fa-xmark");
+  icon.classList.add("fa-bars");
 }
 
 updateActiveCategory(allLink);
@@ -930,3 +961,33 @@ function launchConfetti() {
     confettiContainer.appendChild(confetti);
   }
 }
+
+mobileCategoryLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    currentCategory = link.dataset.category;
+
+    animateFilter(() => {
+      renderProducts();
+
+      setupCartButtons();
+      setupWishlistButtons();
+      setupQuickViewButtons();
+    });
+
+    mobileMenu.classList.remove("mobile-list-active");
+
+    icon.classList.remove("fa-xmark");
+    icon.classList.add("fa-bars");
+  });
+});
+
+pickSneakersBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  document.querySelector("#products").scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+});
